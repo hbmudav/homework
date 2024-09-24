@@ -10,3 +10,5 @@ mutable_list = [7, 8, 9, 'a', 's', 'd']
 print(mutable_list)
 mutable_list[0] = 'psi'
 print(mutable_list)
+mutable_list[3] = 1989
+print(mutable_list)
