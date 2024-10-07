@@ -1,9 +1,9 @@
 from numpy.matrixlib.defmatrix import matrix
 
-
 def get_matrix(n, m, value):
     if m <= 0 or n <= 0:
-        a = []
+        matrix = []
+        return matrix
     else:
         matrix = []
         for i in range(n):
