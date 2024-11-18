@@ -62,15 +62,15 @@ class UrTube:
     def log_out(self):
         self.current_user = None
 
-    def __add__(self, *args):
+    def add(self, *args):
         videos_list = [*args]
         for i in videos_list:
             if isinstance(i, Video):
                 title = i.title
-                if title in self.videos:
-                    continue
-                else:
-                    self.videos.append(i)
+            if title in self.videos:
+                continue
+            else:
+                self.videos.append(i)
 
 
     def get_videos(self, search_word):
