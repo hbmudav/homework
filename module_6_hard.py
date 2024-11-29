@@ -14,7 +14,8 @@ class Figure:
         for i in [r,g,b]:
             if isinstance(i, int) and 0 <= i <= 255:
                 return True
-        return False
+        else:
+            return False
 
     def set_color(self, r, g, b):
         if self.__is_valid_color(r,g,b) == True:
@@ -58,15 +59,14 @@ class Triangle(Figure):
 class Cube(Figure):
     sides_count = 12
 
-    def set_sides_cube(self):
+    def set_sides(self):
         set_sides_cube = []
         for i in range(self.sides_count):
             set_sides_cube.append(self.__sides)
-        self.__sides = set_sides_cube
         return self.__sides
 
     def get_volume(self):
-        return self.__sides ** 3
+        return self.__sides[0] ** 3
 
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
