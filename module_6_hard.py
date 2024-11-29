@@ -1,4 +1,4 @@
-
+import math
 class Figure:
     sides_count = 0
 
@@ -41,32 +41,39 @@ class Figure:
 
 class Circle(Figure):
     sides_count = 1
-    __radius = None
 
-    def set_radius(self):
-        self.__radius = self.__len__() / (2 * 3.14)
-        return self.__radius
+    def __init__(self, __color, *__sides, filled=True):
+        super().__init__(__color, *__sides, filled)
+        self.__sides = __sides[0]
+        __radius = self.__sides / (2 * math.pi)
 
-    def get_square(self):
-        return 3.14 * (self.__radius ** 2)
+    def get_square(self, __radius):
+        Sc = math.pi * (self.__radius ** 2)
+        return Sc
 
 class Triangle(Figure):
     sides_count = 3
 
-    def get_square(self):
-        return (self.__sides ** 2) * (3 ** 0.5) / 4
+    def __init__(self, __color, *__sides, filled=True):
+        super().__init__(__color, *__sides)
+
+    def get_square(self, __sides):
+        self.__len__(__sides)
+        p = self.summa * 0.5
+        St = (p * (p - self.__sides[0]) * (p - self.__sides[1]) * (p - self.__sides[2])) ** 0.5
+        return St
 
 class Cube(Figure):
     sides_count = 12
 
-    def set_sides(self):
-        set_sides_cube = []
-        for i in range(self.sides_count):
-            set_sides_cube.append(self.__sides)
-        return self.__sides
+    def __init__(self, __color, *__sides, filled=True):
+        if len(__sides) == 1:
+            __sides = [__sides[0]] * self.sides_count
+        super().__init__(__color, *__sides)
 
-    def get_volume(self):
-        return self.__sides[0] ** 3
+    def get_volume(self, *__sides):
+        V = self.get_sides()[0] ** 3
+        return V
 
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
@@ -77,10 +84,11 @@ circle1.set_color(55, 66, 77) # Изменится
 print(circle1.get_color())
 cube1.set_color(300, 70, 15) # Не изменится
 print(cube1.get_color())
-
+print()
 # Проверка на изменение сторон:
 cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
 print(cube1.get_sides())
+print()
 circle1.set_sides(15) # Изменится
 print(circle1.get_sides())
 
