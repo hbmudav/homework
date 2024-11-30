@@ -15,8 +15,6 @@ class User:
     def __str__(self):
         return self.nickname
 
-    def __eq__(self, other):
-        return other.nicname == self.nickname
 
 class Video:
     """
@@ -42,22 +40,17 @@ class UrTube:
             if (nickname, hash(password)) == user.get_info():
                 self.current_user = nickname
 
-    def register(self, nickname, password, age):
-        flag = True
+    def register(self, nickname: str, password: str, age: int):
+        password = hash(password)
         for user in self.users:
             if user.nickname == nickname:
-                print(f'Пользователь {nickname} уже существует')
-                flag = False
-                break
+                print(f"Пользователь {nickname} уже существует")
+                return
 
-            if flag.__eq__(True):
-                new_user = User(nickname, password, age)
-                self.nickname = new_user.nickname
-                self.password = new_user.password
-                self.age = new_user.age
-                info = [self.nickname, self.password, self.age]
-                self.users.append(info)
-                self.current_user = self.nickname
+        new_user = User(nickname, password, age)
+        self.users.append(new_user)
+        self.current_user = new_user
+            
 
     def log_out(self):
         self.current_user = None
@@ -92,7 +85,7 @@ class UrTube:
             for video in self.videos:
                 if title == video:
                     video_exist = 1
-                    if self.users[self.current_user].age <= 18:
+                    if self.current_user.age < 18:
                         print("Вам нет 18, пожалуйста покиньте страницу")
                     else:
                         for counter in range(0, self.videos[video].duration):
